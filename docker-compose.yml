@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  ####################### web ###############################
+  botbinance-web:
+    #restart: always
+    container_name: botbinance-web
+    build:
+      context: ./react
+      dockerfile: Dockerfile
+    volumes:
+      - ./react/src/:/react/src/
+      - ./react/public/:/react/public/
+      - ./react/package.json:/react/package.json
+    ports:
+      - "3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  ####################### nginx ###############################
+  botbinance-nginx:
+    #restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: botbinance-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - botbinance-web
