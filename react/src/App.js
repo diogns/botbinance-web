@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import Layout from './layouts/Layout';
 
 export default function App(props) {
     console.log("props",props)
 
     return (
-        <h1>Hello world</h1>
+        <Layout/>
 
     );
 }
